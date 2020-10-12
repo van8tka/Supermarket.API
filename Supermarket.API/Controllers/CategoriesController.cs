@@ -19,7 +19,7 @@ namespace Supermarket.API.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<Category>> GetAllAsync()
+        public IAsyncEnumerable<Category> GetAllAsync()
         {
             var categories = _categoryServices.ListAsync();
             return categories;

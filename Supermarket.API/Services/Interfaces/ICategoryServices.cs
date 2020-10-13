@@ -7,7 +7,6 @@ namespace Supermarket.API.Services.Interfaces
 {
     public interface ICategoryServices
     {
-        //fixme: using IAsyncEnumerable<> instead Task<IEnumerable<>
         IAsyncEnumerable<Category> ListAsync();
     }
 }

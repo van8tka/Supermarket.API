@@ -9,7 +9,7 @@ namespace Supermarket.API.Services.Implementations
 {
     public class CategoryServices:ICategoryServices
     {
-        private ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public CategoryServices(ICategoryRepository categoryRepository)
         {

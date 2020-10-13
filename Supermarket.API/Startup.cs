@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Mime;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Supermarket.API.Domain.Repositories.Implementations;
 using Supermarket.API.Domain.Repositories.Interfaces;
+using Supermarket.API.Mapping;
 using Supermarket.API.Persistence.Contexts;
 using Supermarket.API.Services.Implementations;
 using Supermarket.API.Services.Interfaces;
@@ -29,11 +26,13 @@ namespace Supermarket.API
        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("supermarket_api_in_memory"));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryServices>();
-          }
+            services.AddAutoMapper(cfg => 
+                cfg.AddProfile<ModelToResourceProfile>());
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -45,9 +44,11 @@ namespace Supermarket.API
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
         }
     }
 }

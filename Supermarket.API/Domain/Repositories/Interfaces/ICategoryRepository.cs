@@ -7,6 +7,6 @@ namespace Supermarket.API.Domain.Repositories.Interfaces
 {
     public interface ICategoryRepository
     {
-        IAsyncEnumerable<Category> ListAsync();
+        Task<IEnumerable<Category>> ListAsync();
     }
 }

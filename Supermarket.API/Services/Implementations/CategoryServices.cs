@@ -16,7 +16,7 @@ namespace Supermarket.API.Services.Implementations
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
 
-        public IAsyncEnumerable<Category> ListAsync()
+        public Task<IEnumerable<Category>> ListAsync()
         {
             return _categoryRepository.ListAsync();
         }

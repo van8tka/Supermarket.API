@@ -15,9 +15,9 @@ namespace Supermarket.API.Domain.Repositories.Implementations
         {
         }
 
-        public IAsyncEnumerable<Category> ListAsync()
+        public async Task<IEnumerable<Category>> ListAsync()
         {
-            return  _context.Categories.AsAsyncEnumerable() ;
+            return await _context.Categories.ToListAsync() ;
         }
     }
 }

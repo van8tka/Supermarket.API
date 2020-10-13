@@ -30,8 +30,11 @@ namespace Supermarket.API
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("supermarket_api_in_memory"));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryServices>();
-            services.AddAutoMapper(cfg => 
-                cfg.AddProfile<ModelToResourceProfile>());
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<ModelToResourceProfile>();
+                cfg.AddProfile<ResourceToModelProfile>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -12,7 +12,7 @@ namespace Supermarket.API.Mapping
     {
         public ResourceToModelProfile()
         {
-            CreateMap<Category, SaveCategoryResource>();
+            CreateMap<SaveCategoryResource, Category>();
         }
     }
 }

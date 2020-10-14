@@ -2,10 +2,10 @@
 
 namespace Supermarket.API.Domain.Communication
 {
-    public class SaveCategoryResponse:BaseResponse
+    public class CategoryResponse:BaseResponse
     {
         public Category Category { get; private set; }
-        private SaveCategoryResponse(bool success, string message, Category category) : base(success, message)
+        private CategoryResponse(bool success, string message, Category category) : base(success, message)
         {
             Category = category;
         }
@@ -14,12 +14,12 @@ namespace Supermarket.API.Domain.Communication
         /// </summary>
         /// <param name="category">Saved category.</param>
         /// <returns>Response.</returns>
-        public SaveCategoryResponse(Category category):this(true,string.Empty, category) { }
+        public CategoryResponse(Category category):this(true,string.Empty, category) { }
         /// <summary>
         /// Creates am error response.
         /// </summary>
         /// <param name="message">Error message.</param>
         /// <returns>Response.</returns>
-        public SaveCategoryResponse(string message):this(false,message, null) { }
+        public CategoryResponse(string message):this(false,message, null) { }
     }
 }

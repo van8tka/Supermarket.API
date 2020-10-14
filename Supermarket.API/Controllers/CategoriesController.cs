@@ -55,5 +55,16 @@ namespace Supermarket.API.Controllers
             var categoryResource = _mapper.Map<Category, CategoryResource>(result.Category);
             return Ok(categoryResource);
         }
+
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _categoryServices.DeleteAsync(id);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var categoryResource = _mapper.Map<Category, CategoryResource>(result.Category);
+            return Ok(categoryResource);
+        }
     }
 }

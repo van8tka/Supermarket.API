@@ -1,4 +1,3 @@
-using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +29,8 @@ namespace Supermarket.API
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("supermarket_api_in_memory"));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(cfg =>
             {

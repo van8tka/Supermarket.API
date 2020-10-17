@@ -22,12 +22,20 @@ namespace Supermarket.API.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
-        [HttpGet]
+        [HttpGet(Name="GetAllProducts")]
         public async Task<IEnumerable<ProductResource>> ListAsync()
         {
             var products = await _productService.ListAsync();
             var resources = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductResource>>(products);
             return resources;
+        }
+
+        [HttpGet("{id}", Name = "GetProduct")]
+        public async Task<ProductResource> Get(int id)
+        {
+            var product = await _productService.GetAsync(id);
+            var resource = _mapper.Map<Product, ProductResource>(product);
+            return resource;
         }
 
     }

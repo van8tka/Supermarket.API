@@ -18,5 +18,10 @@ namespace Supermarket.API.Services.Implementations
         {
             return _repository.ListAsync();
         }
+
+        public Task<Product> GetAsync(int id)
+        {
+            return _repository.GetAsync(id);
+        }
     }
 }

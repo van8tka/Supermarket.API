@@ -7,5 +7,6 @@ namespace Supermarket.API.Services.Interfaces
     public interface IProductService
     {
         Task<IEnumerable<Product>> ListAsync();
+        Task<Product> GetAsync(int id);
     }
 }

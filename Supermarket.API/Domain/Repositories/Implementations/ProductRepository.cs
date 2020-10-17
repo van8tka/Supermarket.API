@@ -16,5 +16,10 @@ namespace Supermarket.API.Domain.Repositories.Implementations
         {
             return await _context.Products.Include(p=>p.Category).ToListAsync();
         }
+
+        public async Task<Product> GetAsync(int id)
+        {
+            return await _context.Products.Include(x=>x.Category).FirstOrDefaultAsync(x=>x.Id==id);  
+        }
     }
 }

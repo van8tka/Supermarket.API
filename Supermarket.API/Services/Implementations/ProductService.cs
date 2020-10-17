@@ -23,5 +23,10 @@ namespace Supermarket.API.Services.Implementations
         {
             return _repository.GetAsync(id);
         }
+
+        public Task<Product> GetByName(string productName)
+        {
+            return _repository.GetAsync(productName);
+        }
     }
 }

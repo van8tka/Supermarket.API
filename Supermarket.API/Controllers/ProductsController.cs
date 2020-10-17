@@ -15,7 +15,7 @@ using Supermarket.API.Services.Interfaces;
 namespace Supermarket.API.Controllers
 {
     [Route("/api/[controller]")]
-    public class ProductsController:Controller
+    public class ProductsController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
@@ -29,7 +29,7 @@ namespace Supermarket.API.Controllers
             _distributedCache = distributedCache ?? throw new ArgumentNullException(nameof(distributedCache));
         }
 
-        [HttpGet(Name="GetAllProducts")]
+        [HttpGet(Name = "GetAllProducts")]
         public async Task<IEnumerable<ProductResource>> ListAsync()
         {
             var products = await _productService.ListAsync();
@@ -37,11 +37,11 @@ namespace Supermarket.API.Controllers
             return resources;
         }
 
-        [HttpGet("{id}", Name = "GetProduct")]
+        [HttpGet("{id:int}", Name = "GetProduct")]
         public async Task<ProductResource> Get(int id)
         {
-            var cacheKey = "product_id_"+id;
-            if(!_memoryCache.TryGetValue(cacheKey, out ProductResource resource))
+            var cacheKey = "product_id_" + id;
+            if (!_memoryCache.TryGetValue(cacheKey, out ProductResource resource))
             {
                 var product = await _productService.GetAsync(id);
                 resource = _mapper.Map<Product, ProductResource>(product);
@@ -53,12 +53,12 @@ namespace Supermarket.API.Controllers
                 };
                 _memoryCache.Set(cacheKey, resource, cachExpirationOpt);
             }
-          
+
             return resource;
         }
-
-        [HttpGet(Name = "GetProductByName")]
-        public async Task<ProductResource> Get([FromQuery] string productName)
+    
+        [HttpGet("{productName}" ,Name = "GetProductByName")]
+        public async Task<ProductResource> GetByProductName(string productName)
         {
             var cacheKey = productName.ToLower();
             ProductResource resource;

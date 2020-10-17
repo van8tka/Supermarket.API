@@ -8,5 +8,6 @@ namespace Supermarket.API.Domain.Repositories.Interfaces
     {
         Task<IEnumerable<Product>> ListAsync();
         Task<Product> GetAsync(int id);
+        Task<Product> GetAsync(string productName);
     }
 }

@@ -3,11 +3,11 @@ using Supermarket.API.Domain.Models;
 
 namespace Supermarket.API.Persistence.Contexts
 {
-    public class AppDbContext:DbContext
+    public sealed class AppDbContext:DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+             Database.EnsureCreated();
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -24,8 +24,8 @@ namespace Supermarket.API.Persistence.Contexts
                 .HasForeignKey(x => x.CategoryId);
 
             builder.Entity<Category>().HasData(
-            new Category() { Id = 100, Name = "Fruits and Vegetables"},
-            new Category() { Id=101, Name = "Dairy"}
+            new Category() { Id = 100, Name = "Fruits and Vegetables" },
+            new Category() { Id = 101, Name = "Dairy" }
                 );
 
             builder.Entity<Product>().ToTable("Products");

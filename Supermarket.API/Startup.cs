@@ -32,6 +32,8 @@ namespace Supermarket.API
 
             services.AddMemoryCache();
 
+            services.AddStackExchangeRedisCache(options => { options.Configuration = "127.0.0.1:6379"; });
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryServices>();
             services.AddScoped<IProductRepository, ProductRepository>();

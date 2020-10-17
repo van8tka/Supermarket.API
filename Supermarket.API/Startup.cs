@@ -28,7 +28,9 @@ namespace Supermarket.API
             services.AddControllers();
             //services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("supermarket_api_in_memory"));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])); 
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddMemoryCache();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryServices>();

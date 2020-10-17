@@ -44,10 +44,13 @@ namespace Supermarket.API
                 cfg.AddProfile<ModelToResourceProfile>();
                 cfg.AddProfile<ResourceToModelProfile>();
             });
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "MY API V1"); });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
